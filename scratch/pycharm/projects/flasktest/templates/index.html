@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scipion Dev</title>
+</head>
+<body>
+
+    <div id="scipion_session_view"  class="container">
+        <h1>Development Page to launch Scipion configuration</h1>
+        <label id="scipion_session_id_label"></label>
+        <div id="scipion_cg">
+            <br>
+            <button class="scipion_config_btn" >Configure Scipion Run</button>
+           <button class="scipion_run_btn" >Run Scipion</button>
+            <br><br><br>
+            <div id="scipion_config_div">
+                <label>Please select the microscope:
+                    <select id="scipion_microscope" >
+                                <option value="M01">M01</option>
+                                <option value="M02">M02</option>
+                                <option value="M03">M03</option>
+                    </select>
+                </label><br><br>
+                <label id="scipion_msg_label"></label><br>
+                <label>Dose per frame: <input type="text" id="scipion_dose"></label><br>
+                <label>Number of frames: <input type="text" id="scipion_n_frames"></label><br>
+
+                <button id="scipion_save">Save</button>
+                <button id="scipion_cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{{url_for('static',filename='jquery-3.3.1.min.js')}}"></script>
+    <script src="{{url_for('static',filename='underscore-min.js')}}"></script>
+    <script src="{{url_for('static',filename='backbone-min.js')}}"></script>
+    <script src="{{url_for('static',filename='scipion-front.js')}}"></script>
+</body>
+</html>
+
