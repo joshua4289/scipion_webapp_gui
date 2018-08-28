@@ -4,24 +4,28 @@ import json
 app = Flask(__name__)
 
 session = {
-    'session_id': 'em12345 - 01',
+    'session_id': 'em12345-01',
     'microscope': 'M01',
     'dose_per_frame': None,
-    'numberOfIndividualFrames': None
+    'numberOfIndividualFrames': None,
+    'samplingRate':None
 }
 
 config_values = {
     'M01': {
         'dose_per_frame': 100,
-        'numberOfIndividualFrames': 32
+        'numberOfIndividualFrames': 32,
+        'samplingRate': 1.06
     },
     'M02': {
         'dose_per_frame': 200,
-        'numberOfIndividualFrames': 40
+        'numberOfIndividualFrames': 40,
+        'samplingRate': 1.06
     },
     'M03': {
         'dose_per_frame': 300,
-        'numberOfIndividualFrames': 50
+        'numberOfIndividualFrames': 50,
+        'samplingRate': 1.06
     }
 }
 
@@ -40,10 +44,15 @@ def session_id():
         config_file = json.load(open('./static/m03_workflow.json'))
         print(config_file[0]['dosePerFrame'])
         config_file[0]['dosePerFrame'] = float(data['dose_per_frame'])
-        config_file[0]['numberOfIndividualFrames'] = data['numberOfIndividualFrames']
+        config_file[0]['numberOfIndividualFrames'] = int(data['numberOfIndividualFrames'])
+        config_file[0]['samplingRate'] = float(data['samplingRate'])
+
+        #now these are passed onto the session object
+
         session['dose_per_frame'] = data['dose_per_frame']
         session['numberOfIndividualFrames'] = data['numberOfIndividualFrames']
         session['microscope'] = data['microscope']
+        session['samplingRate'] = data['samplingRate']
         with open('config.json', 'w') as f:
             json.dump(config_file, f, indent=4, sort_keys=True)
         print(json.dumps(config_file, indent=4, sort_keys=True))
@@ -72,21 +81,23 @@ def get_config(microscope):
 
 @app.route('/run_scipion', methods=['POST'])
 def run_scipion():
-    # MAY BE LIES!!!
-    data = request.get_json()
-    # use stomp to send this information to the zocalo queue
+    # # MAY BE LIES!!!
+    # data = request.get_json()
+    # # use stomp to send this information to the zocalo queue
+    #
+    # message = {'recipes': [],
+    #            'parameters': {}}
+    #
+    # # Build a custom recipe
+    # recipe = {}
+    # recipe['1'] = {}
+    # recipe['1']['service'] = "motioncor2_runner"
+    # recipe['1']['queue'] = "motioncor2_runner"
+    # recipe['1']['parameters'] = {'microscope':'m01',
+    #
+    # recipe['1']['output'] = 2
 
-    message = {'recipes': [],
-               'parameters': {}}
-
-    # Build a custom recipe
-    recipe = {}
-    recipe['1'] = {}
-    recipe['1']['service'] = "motioncor2_runner"
-    recipe['1']['queue'] = "motioncor2_runner"
-    recipe['1']['parameters'] = {'microscope':'m01',
-                                 
-    recipe['1']['output'] = 2
+    #module load scipion and start scipion 
 
     return None
 
