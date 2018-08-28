@@ -70,5 +70,25 @@ def get_config(microscope):
     return jsonify(values)
 
 
+@app.route('/run_scipion', methods=['POST'])
+def run_scipion():
+    # MAY BE LIES!!!
+    data = request.get_json()
+    # use stomp to send this information to the zocalo queue
+
+    message = {'recipes': [],
+               'parameters': {}}
+
+    # Build a custom recipe
+    recipe = {}
+    recipe['1'] = {}
+    recipe['1']['service'] = "motioncor2_runner"
+    recipe['1']['queue'] = "motioncor2_runner"
+    recipe['1']['parameters'] = {'microscope':'m01',
+                                 
+    recipe['1']['output'] = 2
+
+    return None
+
 if __name__ == '__main__':
     app.run()
