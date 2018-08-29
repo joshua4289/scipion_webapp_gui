@@ -6,7 +6,10 @@
             session_id: 'session-id',
             microscope: '',
             dose_per_frame: null,
-            numberOfIndividualFrames: null
+            numberOfIndividualFrames: null,
+            samplingRate:null,
+            particleSize:null,
+            minDist:null
         },
         validate: function (attrs, options) {
              if (isNaN(attrs.dose_per_frame)||isNaN(attrs.numberOfIndividualFrames)){
@@ -18,7 +21,10 @@
     var ScipionConfigModel = Backbone.Model.extend({
         defaults: {
             'dose_per_frame': null,
-            'numberOfIndividualFrames':null
+            'numberOfIndividualFrames':null,
+            'samplingRate':null,
+            'particleSize':null,
+            'minDist':null
         }
     });
 
@@ -38,6 +44,9 @@
         render: function () {
             this.$('#scipion_dose').val(this.model.get('dose_per_frame'));
             this.$('#scipion_n_frames').val(this.model.get('numberOfIndividualFrames'));
+            this.$('#scipion_sampling_rate').val(this.model.get('samplingRate'));
+            this.$('#scipion_particle_size').val(this.model.get('particleSize'));
+            this.$('#scipion_min_dist').val(this.model.get('minDist'));
             return this;
         },
 
@@ -59,7 +68,11 @@
             'click #scipion_save': 'on_spc_save',
             'click #scipion_cancel': 'on_spc_cancel',
             'keyup #scipion_dose': 'on_dose_change',
-            'keyup #scipion_n_frames': 'on_n_frames_change'
+            'keyup #scipion_n_frames': 'on_n_frames_change',
+            'keyup #scipion_sampling_rate': 'on_sampling_change',
+            'keyup #scipion_particle_size': 'on_particle_size_change',
+            'keyup #scipion_min_dist': 'on_min_dist_change'
+
         },
 
         initialize: function () {
@@ -78,16 +91,22 @@
             var mic = this.model.get('microscope');
             var dpf = this.model.get('dose_per_frame');
             var nif = this.model.get('numberOfIndividualFrames');
+            var sam = this.model.get('samplingRate');
+            var psz = this.model.get('particleSize');
+            var mdt = this.model.get('minDist');
             var mic_url = '/get_config/' + mic;
 
             var cm = new ScipionConfigModel();
-            if (dpf==null && nif==null){
+            if (dpf==null && nif==null && sam==null && psz==null && mdt==null){
                 cm.fetch({url: mic_url});
             }
             else{
                 cm.set({
                 'dose_per_frame': dpf,
-                'numberOfIndividualFrames': nif
+                'numberOfIndividualFrames': nif,
+                'samplingRate':sam,
+                'particleSize':psz,
+                'minDist':mdt
                 });
 
             }
@@ -104,6 +123,9 @@
                 {
                     'dose_per_frame': this.$('#scipion_dose').val(),
                     'numberOfIndividualFrames': this.$('#scipion_n_frames').val(),
+                    'samplingRate':this.$('#scipion_sampling_rate').val(),
+                    'particleSize':this.$('#scipion_particle_size').val(),
+                    'minDist':this.$('#scipion_min_dist').val(),
                     'microscope': this.$('#scipion_microscope').val()
                 });
             if (!valid){
