@@ -6,40 +6,47 @@
 </head>
 <body>
 
-    <div id="scipion_session_view"  class="container">
-        <h1>Development Page to launch Scipion configuration</h1>
-        <label id="scipion_session_id_label"></label>
-        <div id="scipion_cg">
-            <br>
-            <button class="scipion_config_btn" >Configure Scipion Run</button>
-           <button class="scipion_run_btn" >Run Scipion</button>
-            <br><br><br>
-            <div id="scipion_config_div">
-                <label>Please select the microscope:
-                    <select id="scipion_microscope" >
-                                <option value="M01">M01</option>
-                                <option value="M02">M02</option>
-                                <option value="M03">M03</option>
-                    </select>
-                </label><br><br>
-                <label id="scipion_msg_label"></label><br>
-                <label>Dose per frame(e/A2): <input type="text" id="scipion_dose"></label><br>
-                <label>Number of frames: <input type="text" id="scipion_n_frames"></label><br>
-                <label>Sampling Rate(pix/A):<input type="text" id="scipion_sampling_rate"></label><br>
-                <label>Particle Size(A):<input type="text" id="scipion_particle_size"></label><br>
-                <label>Gautomatch Min Distance(A):<input type="text" id="scipion_min_dist"></label><br>
+<div id="scipion_session_view" class="container">
+    <h1> Scipion Web Interface </h1>
+    <label id="scipion_session_id_label"></label>
+    <div id="scipion_cg">
+        <br>
+        <button id="scipion_config_btn">Configure Scipion Run</button>
+        <button id="scipion_run_btn">Run Scipion</button>
+        <br><br><br>
+        <div id="scipion_config_div">
+            <label>Please select the microscope:
+                <select id="scipion_microscope">
+                    <option value="M01">M01</option>
+                    <option value="M02">M02</option>
+                    <option value="M03">M03</option>
+                    <option value="M04">M04</option>
+                    <option value="M05">M05</option>
+                    <option value="M06">M06</option>
+                    <option value="M07">M07</option>
+                </select>
+            </label><br><br>
+            <label id="scipion_msg_label"></label><br>
+            <label>Dose per frame(e/A2): <input type="text" id="scipion_dose"></label><br>
+            <label>Number of frames: <input type="text" id="scipion_n_frames"></label><br>
+            <label>Sampling Rate(pix/A):<input type="text" id="scipion_sampling_rate"></label><br>
+            <label>Particle Size(A):<input type="text" id="scipion_particle_size"></label><br>
+            <label>Gautomatch Min Distance(A):<input type="text" id="scipion_min_dist"></label><br>
+            <label>Phase Plate Used</label><br>
+            <input type="radio" name="scipion_phase_plate" value="true">Yes<br>
+            <input type="radio" name="scipion_phase_plate" value="false" checked>No <br>
 
-                <button id="scipion_save">Save</button>
-                <button id="scipion_cancel">Cancel</button>
-            </div>
+            <button id="scipion_save">Save</button>
+            <button id="scipion_cancel">Cancel</button>
         </div>
     </div>
+</div>
 
 
-    <script src="{{url_for('static',filename='jquery-3.3.1.min.js')}}"></script>
-    <script src="{{url_for('static',filename='underscore-min.js')}}"></script>
-    <script src="{{url_for('static',filename='backbone-min.js')}}"></script>
-    <script src="{{url_for('static',filename='scipion-front.js')}}"></script>
+<script src="{{url_for('static',filename='jquery-3.3.1.min.js')}}"></script>
+<script src="{{url_for('static',filename='underscore-min.js')}}"></script>
+<script src="{{url_for('static',filename='backbone-min.js')}}"></script>
+<script src="{{url_for('static',filename='scipion-front.js')}}"></script>
 </body>
 </html>
 
