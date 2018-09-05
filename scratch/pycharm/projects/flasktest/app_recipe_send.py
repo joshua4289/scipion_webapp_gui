@@ -118,8 +118,8 @@ def session_id():
             # print(json.dumps(config_file, indent=4, sort_keys=True))
 
         #run_scipion()
-        dict1={'test':1}
-        send_recipe(dict1)
+
+        send_recipe(config_file)
 
         return   jsonify(data)
     else:
@@ -129,7 +129,7 @@ def session_id():
 #TODO: instead of writing out a file send file as recipie
 def send_recipe(user_modified_json):
     #get posted data
-
+    #print (user_modified_json)
     import workflows.recipe
     from workflows.transport.stomp_transport import StompTransport
 
@@ -145,17 +145,21 @@ def send_recipe(user_modified_json):
 
     message = {'recipes': [],'parameters': {}}
 
-    recipe = {}
-    recipe['1'] = {}
-    recipe['1']['service'] = "scipion_runner"
-    recipe['1']['queue'] = "scipion_runner"
+    recipe = { 1 :{'service':'scipion_runner','queue':'scipion_runner','parameters':""}}
+    recipe[1]['parameters'] = user_modified_json
 
-    recipe['1']['parameters'] = "diamond"
+
+    # recipe['1'] = {}
+    # recipe['1']['service'] = "scipion_runner"
+    # recipe['1']['queue'] = "scipion_runner"
+    # recipe['1']['parameters'] = {}
+    # recipe['1']['parameters'] = "diamond"
+    # recipe['1']['output']=[]
 
 
     recipe['start'] = [[1, []]]
 
-    message['custom_recipe'] = recipe
+    message['scipion_workflow'] = recipe
 
     stomp.connect()
     test_valid_recipe = workflows.recipe.Recipe(recipe)
@@ -164,12 +168,13 @@ def send_recipe(user_modified_json):
 
 
     #stomp.connect()
-    stomp.transport.send(
+    stomp.send(
         'processing_recipe',
 
         message
 
     )
+    print(message)
     print("User app data submited ")
 
               #  def send_start_recipie(CommonService):
