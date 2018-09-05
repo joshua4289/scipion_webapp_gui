@@ -67,14 +67,10 @@
         el: '#scipion_session_view',
 
         events: {
-            'click #scipion_config_btn': 'show_form',
-            'click #scipion_run_btn': 'on_scipion_run',
             'click #scipion_save': 'on_spc_save',
             'click #scipion_cancel': 'on_spc_cancel',
 
-
-
-        },
+            },
           //  'keyup #scipion_dose': 'on_number_change',
            // 'keyup #scipion_n_frames': 'on_number_change',
            // 'keyup #scipion_sampling_rate': 'on_number_change',
@@ -93,7 +89,7 @@
             let html = '<b>Your session id: </b>' + this.model.get('session_id');
             this.$('#scipion_session_id_label').html(html);
             this.$('#scipion_microscope').val(this.model.get('microscope'));
-            this.$('#scipion_config_div').hide();
+            this.$('#scipion_config_div');
             // this.$('#scp_msg_label').hide();
 
             var mic = this.model.get('microscope');
