@@ -210,7 +210,7 @@
         "localSigmaCutoff": 1.2, 
         "localSigmaDiam": 100, 
         "lowPass": 30, 
-        "minDist": 2.0, 
+        "minDist": 1.0, 
         "object.className": "ProtGautomatch", 
         "object.comment": "", 
         "object.id": "317", 
