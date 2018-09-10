@@ -134,7 +134,21 @@
                     'minDist':this.$('#scipion_min_dist').val(),
                     'microscope': this.$('#scipion_microscope').val(),
                     'findPhaseShift': this.$('input[name=scipion_phase_plate]:checked').val()
-                });
+                }
+//
+//                {
+//                success: function(){
+//                alert('Job queued!');
+//                }
+//                },
+//
+//                {
+//                error: function(){
+//                alert('Job failed!');
+//                }
+//                }
+
+                );
             if (!valid){
                 alert('Invalid entries. Values not saved!');
             }
