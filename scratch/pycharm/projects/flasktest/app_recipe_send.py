@@ -5,6 +5,10 @@ from workflows.transport.stomp_transport import StompTransport
 
 from pathlib2 import Path
 import workflows, json
+from  optparse import OptionParser
+import sys
+#import webbrowser
+#import threading
 
 app = Flask(__name__)
 
@@ -173,4 +177,17 @@ def get_config(microscope):
 
 
 if __name__ == '__main__':
-    app.run()
+    # print ("opening browser")
+    # threading.Timer(1,lambda:webbrowser.open('http://127.0.0.1:5000'))
+    parser = OptionParser(usage="app_send_recipie.py [options] session-id",description="Triggers processing of a standard ")
+
+    parser.add_option("-s","--session",dest="session_id",action="store", help=" ispyb session-id" )
+
+    (options, args) = parser.parse_args(sys.argv[1:])
+
+    if "--session" in sys.argv:
+        session['session_id'] = options.session_id
+
+
+    app.run(debug=False)
+    #webbrowser.open('127.0.0.1:5000')
