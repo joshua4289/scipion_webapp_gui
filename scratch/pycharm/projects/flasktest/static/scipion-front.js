@@ -10,7 +10,8 @@
             samplingRate:null,
             particleSize:null,
             minDist:null,
-            findPhaseShift:null
+            findPhaseShift:null,
+            windowSize:null
         },
         validate: function (attrs, options) {
              if (isNaN(attrs.dosePerFrame)||isNaN(attrs.numberOfIndividualFrames)){
@@ -26,7 +27,8 @@
             'samplingRate':null,
             'particleSize':null,
             'minDist':null,
-            'findPhaseShift':null
+            'findPhaseShift':null,
+            'windowSize':null
         }
     });
 
@@ -50,6 +52,7 @@
             this.$('#scipion_particle_size').val(this.model.get('particleSize'));
             this.$('#scipion_min_dist').val(this.model.get('minDist'));
             this.$('#scipion_phase_plate').val(this.model.get('findPhaseShift'));
+            this.$('#scipion_window_size').val(this.model.get('windowSize'));
             return this;
         },
 
@@ -99,6 +102,7 @@
             var psz = this.model.get('particleSize');
             var pha = this.model.get('findPhaseShift');
             var mdt = this.model.get('minDist');
+            var ctb = this.model.get('windowSize');
             var mic_url = '/get_config/' + mic;
 
             var cm = new ScipionConfigModel();
@@ -113,6 +117,7 @@
                 'particleSize':psz,
                 'minDist':mdt,
                 'findPhaseShift':pha,
+                'windowSize':ctb,
                 });
 
             }
@@ -133,6 +138,7 @@
                     'particleSize':this.$('#scipion_particle_size').val(),
                     'minDist':this.$('#scipion_min_dist').val(),
                     'microscope': this.$('#scipion_microscope').val(),
+                    'windowSize':this.$('#scipion_window_size').val(),
                     'findPhaseShift': this.$('input[name=scipion_phase_plate]:checked').val()
                 }
 //
