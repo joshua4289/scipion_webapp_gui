@@ -22,45 +22,53 @@ session = {
     'numberOfIndividualFrames': None,
     'samplingRate': None,
     'particleSize': None,
-    'minDist': None
+    'minDist': None,
+    'windowSize':None,
 }
 
 config_values = {
     'M01': {
         'dosePerFrame': 0.5,
         'numberOfIndividualFrames': 32,
-        'samplingRate': 1.06
+        'samplingRate': 1.06,
+        'windowSize':512
     },
     'M02': {
         'dosePerFrame': 0.5,
         'numberOfIndividualFrames': 40,
-        'samplingRate': 1.06
+        'samplingRate': 1.06,
+        'windowSize':512
     },
     'm03': {
         'dosePerFrame': 0.5,
         'numberOfIndividualFrames': 50,
-        'samplingRate': 1.06
+        'samplingRate': 1.06,
+        'windowSize':512
     },
 
     'M04': {
         'dosePerFrame': 0.5,
         'numberOfIndividualFrames': 50,
-        'samplingRate': 1.06
+        'samplingRate': 1.06,
+        'windowSize':512,
     },
     'M05': {
         'dosePerFrame': 0.5,
         'numberOfIndividualFrames': 50,
-        'samplingRate': 1.06
+        'samplingRate': 1.06,
+        'windowSize':512,
     },
     'M06': {
         'dosePerFrame': 0.5,
         'numberOfIndividualFrames': 50,
-        'samplingRate': 1.06
+        'samplingRate': 1.06,
+        'windowSize':512,
     },
     'M07': {
         'dosePerFrame': 0.5,
         'numberOfIndividualFrames': 50,
-        'samplingRate': 1.06
+        'samplingRate': 1.06,
+        'windowSize':512,
     }
 
 }
@@ -101,6 +109,8 @@ def session_id():
         session['particleSize'] = data['particleSize']
         session['minDist'] = data['minDist']
         session['findPhaseShift'] = data['findPhaseShift']
+        session['windowSize']= data['windowSize']
+
 
         # with open('config.json', 'w') as f:
         #     json.dump(config_file, f, indent=4, sort_keys=True)
@@ -179,7 +189,7 @@ def get_config(microscope):
 if __name__ == '__main__':
     # print ("opening browser")
     # threading.Timer(1,lambda:webbrowser.open('http://127.0.0.1:5000'))
-    parser = OptionParser(usage="app_send_recipie.py [options] session-id",description="Triggers processing of a standard ")
+    parser = OptionParser(usage="app_send_recipie.py [options] session-id",description="Processing given collection_id ")
 
     parser.add_option("-s","--session",dest="session_id",action="store", help=" ispyb session-id" )
 
@@ -189,5 +199,14 @@ if __name__ == '__main__':
         session['session_id'] = options.session_id
 
 
-    app.run(debug=False)
-    #webbrowser.open('127.0.0.1:5000')
+    def get_home_from_session(session_id):
+        session_id = options.session_id
+
+        group_name = str(session_id).replace('-','_')
+        scipion_user_data = '~/' + str(group_name) + 'ScipionUserData'
+        scipion_user_datapath = Path(scipion_user_data)
+
+    # get_home_from_session(session['session_id'])
+
+    # webbrowser.open('127.0.0.1:5000')
+    app.run(debug=False,port=8080)
