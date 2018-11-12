@@ -39,7 +39,7 @@ config_values = {
         'samplingRate': 1.06,
         'windowSize':512
     },
-    'm03': {
+    'M03': {
         'dosePerFrame': 0.5,
         'numberOfIndividualFrames': 50,
         'samplingRate': 1.06,
