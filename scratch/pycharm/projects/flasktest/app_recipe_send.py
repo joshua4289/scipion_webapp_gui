@@ -149,7 +149,7 @@ def send_recipe(session_dictionary):
 
     message = {'recipes': [], 'parameters': {}}
 
-    recipe = {1: {'service': 'scipion_runner', 'queue': 'scipion_runner', 'parameters': ""}}
+    recipe = {1: {'service': 'Scipion_runner', 'queue': 'Scipion_runner', 'parameters': ""}}
     recipe[1]['parameters'] = session_dictionary  # pass session information
 
     recipe['start'] = [[1, []]]
