@@ -7,6 +7,8 @@
             microscope: '',
             dosePerFrame: null,
             numberOfIndividualFrames: null,
+	    patchX:null,
+	    patchY:null,			
             samplingRate:null,
             particleSize:null,
             minDist:null,
@@ -25,6 +27,8 @@
             'dosePerFrame': null,
             'numberOfIndividualFrames':null,
             'samplingRate':null,
+	    'patchX':null,
+	    'patchY':null,		
             'particleSize':null,
             'minDist':null,
             'findPhaseShift':null,
@@ -49,7 +53,9 @@
             this.$('#scipion_dose').val(this.model.get('dosePerFrame'));
             this.$('#scipion_n_frames').val(this.model.get('numberOfIndividualFrames'));
             this.$('#scipion_sampling_rate').val(this.model.get('samplingRate'));
-            this.$('#scipion_particle_size').val(this.model.get('particleSize'));
+            this.$('#scipion_patch_x').val(this.model.get('patchX'));
+	    this.$('#scipion_patch_y').val(this.model.get('patchY'));	
+	    this.$('#scipion_particle_size').val(this.model.get('particleSize'));
             this.$('#scipion_min_dist').val(this.model.get('minDist'));
             this.$('#scipion_phase_plate').val(this.model.get('findPhaseShift'));
             this.$('#scipion_window_size').val(this.model.get('windowSize'));
