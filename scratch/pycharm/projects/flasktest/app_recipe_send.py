@@ -134,7 +134,7 @@ def send_recipe(session_dictionary):
 
     message = {'recipes': [], 'parameters': {}}
 
-    recipe = {1: {'service': 'Scipion_runner', 'queue': 'Scipion_runner', 'parameters': ""}}
+    recipe = {1: {'service': 'Scipion_runner', 'queue': 'ScipionMain', 'parameters': ""}}
     recipe[1]['parameters'] = session_dictionary  # pass session information
 
     recipe['start'] = [[1, []]]
@@ -174,7 +174,7 @@ if __name__ == '__main__':
 
     (options, args) = parser.parse_args(sys.argv[1:])
 
-    if "--session" in sys.argv:
+    if "--session" or "-s" in sys.argv:
         session['session_id'] = options.session_id
 
 
