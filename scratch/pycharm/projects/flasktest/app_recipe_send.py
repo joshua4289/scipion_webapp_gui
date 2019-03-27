@@ -168,6 +168,7 @@ def get_config(microscope):
 
 if __name__ == '__main__':
 
+<<<<<<< HEAD
     # parser = OptionParser(usage="app_send_recipie.py [options] session-id",
     #                       description="Processing given collection_id ")
     #
@@ -177,6 +178,17 @@ if __name__ == '__main__':
     #
     # if "--session" or "-s" in sys.argv:
     #     session['session_id'] = options.session_id
+=======
+    parser = OptionParser(usage="app_send_recipie.py [options] session-id",
+                          description="Processing given collection_id ")
+
+    parser.add_option("-s", "--session", dest="session_id", action="store", help=" ispyb session-id")
+
+    (options, args) = parser.parse_args(sys.argv[1:])
+
+    if "--session" or "-s" in sys.argv:
+        session['session_id'] = options.session_id
+>>>>>>> 21b5ebe5a90248dce2f269152d38d3b7dc4e94a3
 
 
     def get_home_from_session(session_id):
