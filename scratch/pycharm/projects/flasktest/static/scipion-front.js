@@ -3,7 +3,7 @@
     var ScipionSessionModel = Backbone.Model.extend({
         url: '/session',
         defaults: {
-            session_id: 'session-id',
+            session_id: null,
             microscope: '',
             dosePerFrame: null,
             numberOfIndividualFrames: null,
@@ -24,6 +24,7 @@
     // Model for configuration items
     var ScipionConfigModel = Backbone.Model.extend({
         defaults: {
+            'session_id':null,
             'dosePerFrame': null,
             'numberOfIndividualFrames':null,
             'samplingRate':null,
@@ -50,6 +51,7 @@
         },
 
         render: function () {
+            this.$('#scipion_cg').val(this.model.get('session_id'));
             this.$('#scipion_dose').val(this.model.get('dosePerFrame'));
             this.$('#scipion_n_frames').val(this.model.get('numberOfIndividualFrames'));
             this.$('#scipion_sampling_rate').val(this.model.get('samplingRate'));
@@ -95,8 +97,8 @@
         },
 
         render: function () {
-            let html = '<b>Your session id: </b>' + this.model.get('session_id');
-            this.$('#scipion_session_id_label').html(html);
+            //let html = '<b>Enter </b>' + this.model.get('session_id');
+            // this.$('#scipion_session_id_label').html(html);
             this.$('#scipion_microscope').val(this.model.get('microscope'));
             this.$('#scipion_config_div');
             // this.$('#scp_msg_label').hide();
@@ -145,7 +147,9 @@
                     'minDist':this.$('#scipion_min_dist').val(),
                     'microscope': this.$('#scipion_microscope').val(),
                     'windowSize':this.$('#scipion_window_size').val(),
-                    'findPhaseShift': this.$('input[name=scipion_phase_plate]:checked').val()
+                    'findPhaseShift': this.$('input[name=scipion_phase_plate]:checked').val(),
+                    'session_id':this.$('#scipion_cg').val(),
+
                 }
 //
 //                {

@@ -98,6 +98,7 @@ def session_id():
     if request.method == 'POST':
         data = request.get_json()
 
+        session['session_id'] = data['session_id']
         session['dosePerFrame'] = data['dosePerFrame']
         session['numberOfIndividualFrames'] = data['numberOfIndividualFrames']
         session['patchX'] = data['patchX']
@@ -134,7 +135,7 @@ def send_recipe(session_dictionary):
 
     message = {'recipes': [], 'parameters': {}}
 
-    recipe = {1: {'service': 'Scipion_runner', 'queue': 'Scipion_runner', 'parameters': ""}}
+    recipe = {1: {'service': 'Scipion_runner', 'queue': 'ScipionMain', 'parameters': ""}}
     recipe[1]['parameters'] = session_dictionary  # pass session information
 
     recipe['start'] = [[1, []]]
@@ -167,15 +168,15 @@ def get_config(microscope):
 
 if __name__ == '__main__':
 
-    parser = OptionParser(usage="app_send_recipie.py [options] session-id",
-                          description="Processing given collection_id ")
-
-    parser.add_option("-s", "--session", dest="session_id", action="store", help=" ispyb session-id")
-
-    (options, args) = parser.parse_args(sys.argv[1:])
-
-    if "--session" in sys.argv:
-        session['session_id'] = options.session_id
+    # parser = OptionParser(usage="app_send_recipie.py [options] session-id",
+    #                       description="Processing given collection_id ")
+    #
+    # parser.add_option("-s", "--session", dest="session_id", action="store", help=" ispyb session-id")
+    #
+    # (options, args) = parser.parse_args(sys.argv[1:])
+    #
+    # if "--session" or "-s" in sys.argv:
+    #     session['session_id'] = options.session_id
 
 
     def get_home_from_session(session_id):
